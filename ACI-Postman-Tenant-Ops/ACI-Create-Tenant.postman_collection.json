@@ -1,0 +1,683 @@
+{
+	"info": {
+		"_postman_id": "c069e143-b813-4bb6-af13-52d86970d996",
+		"name": "ACI-Create-Tenant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"aaaUser\" : {\n    \"attributes\" : {\n      \"name\" : \"{{username}}\",\n      \"pwd\" : \"{{password}}\"\n    }\n  }\n}\n"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/aaaLogin.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"aaaLogin.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"aaaUser\" : {\n    \"attributes\" : {\n      \"name\" : \"{{username}}\",\n      \"pwd\" : \"{{password}}\"\n    }\n  }\n}\n"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/aaaLogin.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"aaaLogin.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tenant",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni/tn-{{new_tenant}}.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Tenant",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"fvTenant\" : {\n    \"attributes\" : {\n      \"name\" : \"{{new_tenant}}\"\n    }\n  }\n}\n\n\n       "
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New VRF",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fvTenant\": {\n        \"attributes\": {\n            \"name\": \"{{new_tenant}}\",\n            \"status\": \"created,modified\"\n        },\n        \"children\": [\n        {\n                \"fvCtx\": {\n                    \"attributes\": {\n                        \"name\": \"{{new_vrf}}\",\n                        \"status\": \"created,modified\"\n                }\n            }\n        }\n            ]\n        }\n}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Application Profile",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fvTenant\": {\n        \"attributes\": {\n            \"name\": \"{{new_tenant}}\",\n            \"status\": \"created,modified\"\n        },\n        \"children\": [\n        {\n                \"fvAp\": {\n                    \"attributes\": {\n                        \"name\": \"{{app_profile}}\",\n                        \"status\": \"created,modified\"\n                }\n            }\n        }\n            ]\n        }\n}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New EPG",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"fvTenant\":{  \n      \"attributes\":{  \n         \"name\":\"{{new_tenant}}\",\n         \"status\":\"created,modified\"\n      },\n      \"children\":[  \n         {  \n            \"fvAp\":{  \n               \"attributes\":{  \n                  \"name\":\"{{app_profile}}\",\n                  \"status\":\"created,modified\"\n               },\n               \"children\":[\n                   {  \n                     \"fvAEPg\":{  \n                        \"attributes\":{  \n                           \"name\":\"{{new_epg}}\",\n                           \"status\":\"created,modified\"\n                        }\n            }\n         }\n         ]\n            }\n         }\n   ]\n}\n}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add EPG to domain (VMs & Bare-Metal)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"fvTenant\":{  \n      \"attributes\":{  \n         \"name\":\"{{new_tenant}}\",\n         \"status\":\"created,modified\"\n      },\n      \"children\":[  \n         {  \n            \"fvAp\":{  \n               \"attributes\":{  \n                  \"name\":\"{{app_profile}}\",\n                  \"status\":\"created,modified\"\n               },\n               \"children\":[\n                   {  \n                     \"fvAEPg\":{  \n                        \"attributes\":{  \n                           \"name\":\"{{new_epg}}\",\n                           \"status\":\"created,modified\"\n                        },\n                        \"children\":[\n                            {\n                                \"fvRsDomAtt\":{\n                                    \"attributes\":{\n                                        \"status\":\"created,modified\",\n                                        \"tDn\":\"uni/phys-phys\"\n                                    }\n                                }\n                            }\n                            ]\n            }\n         }\n         ]\n            }\n         }\n   ]\n}\n}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign 1st EPG to Dell Server VPC",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "payload{\"fvRsPathAtt\":{\"attributes\":{\"encap\":\"vlan-{{vlan1}}\",\"tDn\":\"topology/pod-1/protpaths-101-102/pathep-[DELLSRVNAME-VPC-101e41-102e41]\",\"status\":\"created,modified\"},\"children\":[]}}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/tn-{{new_tenant}}/ap-{{app_profile}}/epg-{{new_epg}}.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}",
+						"ap-{{app_profile}}",
+						"epg-{{new_epg}}.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Second EPG",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"fvTenant\":{  \n      \"attributes\":{  \n         \"name\":\"{{new_tenant}}\",\n         \"status\":\"created,modified\"\n      },\n      \"children\":[  \n         {  \n            \"fvAp\":{  \n               \"attributes\":{  \n                  \"name\":\"{{app_profile}}\",\n                  \"status\":\"created,modified\"\n               },\n               \"children\":[\n                   {  \n                     \"fvAEPg\":{  \n                        \"attributes\":{  \n                           \"name\":\"{{second_epg}}\",\n                           \"status\":\"created,modified\"\n                        }\n            }\n         }\n         ]\n            }\n         }\n   ]\n}\n}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add 2nd EPG to domain (VMs & Bare-Metal)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"fvTenant\":{  \n      \"attributes\":{  \n         \"name\":\"{{new_tenant}}\",\n         \"status\":\"created,modified\"\n      },\n      \"children\":[  \n         {  \n            \"fvAp\":{  \n               \"attributes\":{  \n                  \"name\":\"{{app_profile}}\",\n                  \"status\":\"created,modified\"\n               },\n               \"children\":[\n                   {  \n                     \"fvAEPg\":{  \n                        \"attributes\":{  \n                           \"name\":\"{{second_epg}}\",\n                           \"status\":\"created,modified\"\n                        },\n                        \"children\":[\n                            {\n                                \"fvRsDomAtt\":{\n                                    \"attributes\":{\n                                        \"status\":\"created,modified\",\n                                        \"tDn\":\"uni/phys-phys\"\n                                    }\n                                }\n                            }\n                            ]\n            }\n         }\n         ]\n            }\n         }\n   ]\n}\n}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Assign 2nd EPG to Dell Server VPC Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "payload{\"fvRsPathAtt\":{\"attributes\":{\"encap\":\"vlan-{{vlan2}}\",\"tDn\":\"topology/pod-1/protpaths-101-102/pathep-[DELLSRVNAME-VPC-101e41-102e41]\",\"status\":\"created,modified\"},\"children\":[]}}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/tn-{{new_tenant}}/ap-{{app_profile}}/epg-{{second_epg}}.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}",
+						"ap-{{app_profile}}",
+						"epg-{{second_epg}}.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Bridge Domain",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fvTenant\": {\n        \"attributes\": {\n            \"name\": \"{{new_tenant}}\",\n            \"status\": \"created,modified\"\n        },\n        \"children\": [\n        {\n                \"fvBD\": {\n                    \"attributes\": {\n                        \"name\": \"{{new_bd}}\",\n                        \"status\": \"created,modified\"\n                }\n            }\n        }\n            ]\n        }\n}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Subnet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "payload{\"fvSubnet\":{\"attributes\":{\"dn\":\"uni/tn-{{new_tenant}}/BD-{{new_bd}}/subnet-[{{new_subnet}}]\",\"ctrl\":\"unspecified\",\"ip\":\"{{new_subnet}}\",\"rn\":\"subnet-[{{new_subnet}}]\",\"status\":\"created,modified\"},\"children\":[]}}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/tn-{{new_tenant}}/BD-{{new_bd}}/subnet-[{{new_subnet}}].json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}",
+						"BD-{{new_bd}}",
+						"subnet-[{{new_subnet}}].json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attach BD EPG",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\npayload{\"fvRsBd\":{\"attributes\":{\"tnFvBDName\":\"{{new_bd}}\"},\"children\":[]}}\n"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/tn-{{new_tenant}}/ap-{{app_profile}}/epg-{{new_epg}}/rsbd.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}",
+						"ap-{{app_profile}}",
+						"epg-{{new_epg}}",
+						"rsbd.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Associate VRF to BD",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "payload{\"fvRsCtx\":{\"attributes\":{\"tnFvCtxName\":\"{{new_vrf}}\"},\"children\":[]}}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/tn-{{new_tenant}}/BD-{{new_bd}}/rsctx.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}",
+						"BD-{{new_bd}}",
+						"rsctx.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Attach BD to 2nd EPG",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\npayload{\"fvRsBd\":{\"attributes\":{\"tnFvBDName\":\"{{new_bd}}\"},\"children\":[]}}\n"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/tn-{{new_tenant}}/ap-{{app_profile}}/epg-{{second_epg}}/rsbd.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}",
+						"ap-{{app_profile}}",
+						"epg-{{second_epg}}",
+						"rsbd.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Security-filter",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"fvTenant\":{  \n      \"attributes\":{  \n         \"name\":\"{{new_tenant}}\",\n         \"status\":\"created,modified\"\n},\n    \"children\": [\n{  \n   \"vzFilter\":{  \n      \"attributes\":{  \n         \"name\":\"any\",\n         \"status\":\"created,modified\"\n      },\n      \"children\":[  \n         {  \n            \"vzEntry\":{  \n               \"attributes\":{  \n                  \"applyToFrag\":\"no\",\n                  \"arpOpc\":\"unspecified\",\n                  \"dFromPort\":\"unspecified\",\n                  \"dToPort\":\"unspecified\",\n                  \"descr\":\"\",\n                  \"etherT\":\"unspecified\",\n                  \"name\":\"Any\",\n                  \"prot\":\"unspecified\",\n                  \"sFromPort\":\"unspecified\",\n                  \"sToPort\":\"unspecified\",\n                  \"tcpRules\":\"\",\n                  \"status\":\"created,modified\"\n               }\n            }\n         }\n      ]\n   }\n}\n]\n}\n}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Contract",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \n   \"fvTenant\":{  \n      \"attributes\":{  \n         \"name\":\"{{new_tenant}}\",\n         \"status\":\"created,modified\"\n},\n    \"children\": [\n        {  \n            \"vzBrCP\":{\n                \"attributes\":{\n                    \"name\":\"{{new_contract}}\",\n                    \"prio\":\"unspecified\",\n                    \"scope\":\"context\",\n                    \"status\":\"created,modified\"\n                },\n                \"children\":[\n                    {\n                         \"vzSubj\":{\n                             \"attributes\":{\n                                 \"name\":\"allow-any\",\n                                 \"status\":\"created,modified\"\n                    },\n                    \"children\":[\n                        {\n                            \"vzRsSubjFiltAtt\":{\n                                \"attributes\":{\n                                    \"tnVzFilterName\":\"any\",\n                                    \"status\":\"created,modified\"\n                        }\n                            }\n                        }\n                            ]\n                            }\n                        }\n            ]\n            }\n        }\n        ]\n   }\n}\n        "
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Provided Contract",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvRsProv\":{\"attributes\":{\"tnVzBrCPName\":\"{{new_contract}}\",\"status\":\"created,modified\"},\"children\":[]}}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/tn-{{new_tenant}}/ap-{{app_profile}}/epg-{{new_epg}}.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}",
+						"ap-{{app_profile}}",
+						"epg-{{new_epg}}.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Consumed Contract",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"fvRsCons\":{\"attributes\":{\"tnVzBrCPName\":\"{{new_contract}}\",\"status\":\"created,modified\"},\"children\":[]}}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/tn-{{new_tenant}}/ap-{{app_profile}}/epg-{{new_epg}}.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}",
+						"ap-{{app_profile}}",
+						"epg-{{new_epg}}.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Associate EPGs to Contract",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "payload{\"fvTenant\":{\"attributes\":{\"dn\":\"uni/tn-{{new_tenant}}\",\"status\":\"modified\"},\"children\":[{\"fvAp\":{\"attributes\":{\"dn\":\"uni/tn-{{new_tenant}}/ap-{{app_profile}}\",\"status\":\"modified\"},\"children\":[{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-{{new_tenant}}/ap-{{app_profile}}/epg-{{second_epg}}\",\"status\":\"modified\"},\"children\":[{\"fvRsProv\":{\"attributes\":{\"tnVzBrCPName\":\"{{new_contract}}\",\"status\":\"created,modified\"},\"children\":[]}}]}},{\"fvAEPg\":{\"attributes\":{\"dn\":\"uni/tn-{{new_tenant}}/ap-{{app_profile}}/epg-{{new_epg}}\",\"status\":\"modified\"},\"children\":[{\"fvRsCons\":{\"attributes\":{\"tnVzBrCPName\":\"{{new_contract}}\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}},{\"drawCont\":{\"attributes\":{\"dn\":\"uni/tn-{{new_tenant}}/cont\",\"status\":\"created,modified\"},\"children\":[{\"drawInst\":{\"attributes\":{\"dn\":\"uni/tn-{{new_tenant}}/cont/item-[uni/tn-{{new_tenant}}/ap-{{app_profile}}]\",\"oDn\":\"uni/tn-{{new_tenant}}/ap-{{app_profile}}\",\"info\":\"{'{fvAp/epg}-{second_epg}':{'x':65,'y':324.5000000000001},'{fvAp/epg}-{{{new_epg}}}':{'x':185,'y':324.5000000000001},'{fvAp/contract}-{{{new_contract}}}':{'x':145,'y':10}}\",\"status\":\"created,modified\"},\"children\":[]}}]}}]}}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/tn-{{new_tenant}}.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"tn-{{new_tenant}}.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Bridge Domain",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"fvTenant\": {\n        \"attributes\": {\n            \"name\": \"{{new_tenant}}\",\n            \"status\": \"created,modified\"\n        },\n        \"children\": [\n        {\n                \"fvBD\": {\n                    \"attributes\": {\n                        \"name\": \"{{new_bd}}\",\n                        \"status\": \"created,modified\"\n                }\n            }\n        }\n            ]\n        }\n}"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/mo/uni.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"mo",
+						"uni.json"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "26b3aedb-ced8-4c92-9ed1-b1aaac301591",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "38166e00-ff6a-4047-8533-ff008df22ba7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
