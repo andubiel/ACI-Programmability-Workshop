@@ -1,0 +1,116 @@
+---
+- name: DElete Portgroup - Vlan
+  hosts: localhost
+  vars_files:
+    - vars.yml
+  gather_facts: no
+  tasks:
+  - name: Delete vlan portgroup db
+    vmware_portgroup:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        validate_certs: false
+        hosts: '{{esxi_host2}}'
+        switch_name: '{{switch_name}}'
+        portgroup_name: '{{portgroup_db}}'
+        vlan_id: '{{db_id}}'
+        state: absent
+        #delegate_to: localhost
+  - name: Delete vlan portgroup web
+    vmware_portgroup:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        validate_certs: false
+        hosts: '{{esxi_host1}}'
+        switch_name: '{{switch_name}}'
+        portgroup_name: '{{portgroup_web}}'
+        vlan_id: '{{web_id}}'
+        state: absent
+        #delegate_to: localhost
+
+  - name: Delete  vlans vNIC template Fabric A
+    ucs_vnic_template:
+      name: ESX_MGMT_A
+      hostname: "{{ ucs_hostname }}"
+      username: "{{ ucs_username }}"
+      password: "{{ ucs_password }}"
+      peer_redundancy_templ: null
+      #cdn_source: "{{vnic-template-a}}"
+      fabric: A
+      template_type: updating-template
+      vlans_list:
+      - name: default
+        native: 'yes'
+      - name: "{{vlan1}}"
+        native: 'no'
+        state: absent
+      - name: "{{vlan2}}"
+        native: 'no'
+        state: absent
+    #use_ssl: false
+    #use_proxy: false
+
+  - name: Delete vNIC template Fabric B
+    ucs_vnic_template:
+      name: ESX_MGMT_B
+      hostname: "{{ ucs_hostname }}"
+      username: "{{ ucs_username }}"
+      password: "{{ ucs_password }}"
+      peer_redundancy_templ: null
+      #cdn_source: "{{vnic-template-b}}"
+      fabric: B
+      template_type: updating-template
+      vlans_list:
+      - name: default
+        native: 'yes'
+      - name: "{{vlan1}}"
+        native: 'no'
+        state: absent
+      - name: "{{vlan2}}"
+        native: 'no'
+        state: absent
+      #use_ssl: false
+      #use_proxy: false
+  - name: Delete DB Vlan
+    ucs_vlans:
+      hostname: "{{ ucs_hostname }}"
+      username: "{{ ucs_username }}"
+      password: "{{ ucs_password }}"
+      state: absent
+      name: "{{vlan_db}}"
+      id: "{{db_id}}"
+      native: 'no'
+      #use_proxy: false
+      #use_ssl: false
+
+  - name: Delete Web Vlan
+    ucs_vlans:
+      hostname: "{{ ucs_hostname }}"
+      username: "{{ ucs_username }}"
+      password: "{{ ucs_password }}"
+      state: absent
+      name: "{{vlan_web}}"
+      id: "{{web_id}}"
+      native: 'no'
+
+- name: Delete Tenant
+  hosts: apic
+  vars_files:
+    - vars.yml
+  gather_facts: no
+  vars:
+    aci_login: &aci_login
+      hostname: '{{ aci_hostname }}'
+      username: '{{ aci_username }}'
+      password: '{{ aci_password }}'
+      validate_certs: false
+  tasks:
+  - name: Delete Tenant
+    aci_tenant:
+        <<: *aci_login
+        tenant: '{{ tenant }}'
+        description: 'tenant'
+        state: absent
+    delegate_to: localhost

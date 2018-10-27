@@ -1,0 +1,161 @@
+---
+# Demo playbook
+- name: Configuring Tenant
+  hosts: apic
+  vars_files:
+    - vars.yml
+  gather_facts: no
+  vars:
+    aci_login: &aci_login
+      hostname: '{{ aci_hostname }}'
+      username: '{{ aci_username }}'
+      password: '{{ aci_password }}'
+      validate_certs: no
+
+  tasks:
+  - name: Create Tenant
+    aci_tenant:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      description: 'tenant'
+      state: present
+    delegate_to: localhost
+
+  - name: Create VRF
+    aci_vrf:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      vrf_name: '{{ vrf }}'
+      state: present
+    delegate_to: localhost
+
+  - name: Creating BD
+    aci_bd:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      vrf: '{{ vrf }}'
+      bd: '{{ bd.name }}'
+      state: present
+    delegate_to: localhost
+
+  - name: Create BD Subnet
+    aci_bd_subnet:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      bd: '{{ bd.name }}'
+      gateway: '{{ bd.ip }}'
+      mask: '{{ bd.mask }}'
+      state: present
+    delegate_to: localhost
+
+  - name: Create AP
+    aci_ap:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      app_profile: '{{ app_profile }}'
+      state: present
+    delegate_to: localhost
+
+  - name: Create web_epg
+    aci_epg:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      app_profile: '{{ app_profile }}'
+      epg: '{{ epg1 }}'
+      bd: '{{ bd.name }}'
+      state: present
+    delegate_to: localhost
+
+  - name: Create db_epg
+    aci_epg:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      app_profile: '{{ app_profile }}'
+      epg: '{{ epg2 }}'
+      bd: '{{ bd.name }}'
+      state: present
+    delegate_to: localhost
+
+  - name: Create Filter
+    aci_filter:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      filter: '{{ filter }}'
+      state: present
+    delegate_to: localhost
+
+  - name: Create Filter Entry
+    aci_filter_entry:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      filter: '{{ filter }}'
+      filter_entry: '{{ filter_entry }}'
+      state: present
+    delegate_to: localhost
+
+  - name: Create Tenant Contract
+    aci_contract:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      contract: '{{ contract }}'
+      scope: tenant
+      state: present
+    delegate_to: localhost
+
+  - name: Create Contract Subject
+    aci_contract_subject:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      contract: '{{ contract }}'
+      contract_subject: '{{ contract_subject }}'
+      reverse_filter: yes
+      state: present
+    delegate_to: localhost
+
+  - name: Bind Contract Subject to filter
+    aci_contract_subject_to_filter:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      contract: '{{ contract }}'
+      contract_subject: '{{ contract_subject }}'
+      filter: '{{ filter }}'
+      state: present
+    delegate_to: localhost
+
+  - name: Bind EPG to Contract
+    aci_epg_to_contract:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      epg: '{{ item.epg }}'
+      app_profile: '{{ app_profile }}'
+      contract: '{{ contract }}'
+      contract_type: '{{ item.type }}'
+    with_items:
+    - epg: '{{ epg1 }}'
+      type: consumer
+    - epg: '{{ epg1 }}'
+      type: provider
+    - epg: '{{ epg2 }}'
+      type: consumer
+    - epg: '{{ epg2 }}'
+      type: provider
+      state: present
+    delegate_to: localhost
+
+  - name: Deploying EPG
+    aci_epg_to_domain:
+      <<: *aci_login
+      tenant: '{{ tenant }}'
+      app_profile: '{{ app_profile }}'
+      epg: '{{ item }}'
+      domain_type: phys
+      #domain: vmm
+      domain: phys
+      #domain_profile: '{{ vmm_domain }}'
+      domain_profile: '{{ phys_domain }}'
+      deploy_immediacy: immediate
+      state: present
+    with_items:
+    - '{{ epg1 }}'
+    - '{{ epg2 }}'
+    delegate_to: localhost

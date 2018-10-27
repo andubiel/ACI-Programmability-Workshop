@@ -1,0 +1,8 @@
+[vcenter]
+clms-vcenter2.cisco.com
+
+[localhost]
+
+[apic]
+10.82.17.108
+#192.168.1.245

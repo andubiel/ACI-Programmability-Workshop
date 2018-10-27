@@ -1,0 +1,31 @@
+---
+- name: Configuring Portgroup - Vlan
+  hosts: localhost
+  vars_files:
+    - vars.yml
+  gather_facts: no
+  tasks:
+  - name: Create vlan portgroup db
+    vmware_portgroup:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        validate_certs: false
+        hosts: '{{esxi_host2}}'
+        switch_name: '{{switch_name}}'
+        portgroup_name: '{{portgroup_db}}'
+        vlan_id: '{{db_id}}'
+        state: present
+        #delegate_to: localhost
+  - name: Create vlan portgroup web
+    vmware_portgroup:
+        hostname: '{{ vcenter_hostname }}'
+        username: '{{ vcenter_username }}'
+        password: '{{ vcenter_password }}'
+        validate_certs: false
+        hosts: '{{esxi_host1}}'
+        switch_name: '{{switch_name}}'
+        portgroup_name: '{{portgroup_web}}'
+        vlan_id: '{{web_id}}'
+        state: present
+        #delegate_to: localhost

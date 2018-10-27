@@ -1,0 +1,26 @@
+---
+#Tenant variables
+
+  aci_login: &aci_login
+    hostname: '{{ aci_hostname }}'
+    username: '{{ aci_username }}'
+    password: '{{ aci_password }}'
+    validate_certs: no
+  tenant: Intent
+  vrf: vrf_intent
+  bd:
+    name: bd_intent_1
+    ip: 9.9.9.1
+    mask: 24
+  app_profile: intentapp1
+  filter: Contract1_filter
+  filter_entry: Contract1_entry
+  contract: Contract1
+  contract_subject: Subject1
+  epg1: web_epg
+  epg2: db_epg
+  vmm_domain: Pod1
+  phys_domain: phys
+  aci_username: admin
+  aci_password: C!sc0123
+  aci_hostname: 192.168.1.245

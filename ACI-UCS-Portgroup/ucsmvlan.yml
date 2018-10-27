@@ -1,0 +1,79 @@
+---
+# Playbook VLAN configuration using the [ucs] hosts group
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars_files:
+   - vars.yml
+  tasks:
+
+  - name: Configure DB Vlan
+    ucs_vlans:
+      hostname: "{{ ucs_hostname }}"
+      username: "{{ ucs_username }}"
+      password: "{{ ucs_password }}"
+      state: present
+      name: "{{vlan_db}}"
+      id: "{{db_id}}"
+      native: 'no'
+      use_proxy: false
+      use_ssl: false
+
+  - name: Configure Web Vlan
+    ucs_vlans:
+      hostname: "{{ ucs_hostname }}"
+      username: "{{ ucs_username }}"
+      password: "{{ ucs_password }}"
+      state: present
+      name: "{{vlan_web}}"
+      id: "{{web_id}}"
+      native: 'no'
+      use_proxy: false
+      use_ssl: false
+
+  - name: Configure vNIC template Fabric A
+    ucs_vnic_template:
+      name: ESX_MGMT_A
+      hostname: "{{ ucs_hostname }}"
+      username: "{{ ucs_username }}"
+      password: "{{ ucs_password }}"
+      peer_redundancy_templ: null
+      #cdn_source: "{{vnic-template-a}}"
+      fabric: A
+      state: present
+      template_type: updating-template
+      vlans_list:
+      - name: default
+        native: 'yes'
+      - name: "{{vlan1}}"
+        native: 'no'
+      - name: "{{vlan2}}"
+        native: 'no'
+      - name: "{{vlan3}}"
+        native: 'no'
+      use_ssl: false
+      use_proxy: false
+
+  - name: Configure vNIC template Fabric B
+    ucs_vnic_template:
+      name: ESX_MGMT_B
+      hostname: "{{ ucs_hostname }}"
+      username: "{{ ucs_username }}"
+      password: "{{ ucs_password }}"
+      peer_redundancy_templ: null
+      #cdn_source: "{{vnic-template-b}}"
+      fabric: B
+      state: present
+      template_type: updating-template
+      vlans_list:
+      - name: default
+        native: 'yes'
+      - name: "{{vlan1}}"
+        native: 'no'
+      - name: "{{vlan2}}"
+        native: 'no'
+      - name: "{{vlan2}}"
+        native: 'no'
+
+      use_ssl: false
+      use_proxy: false
