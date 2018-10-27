@@ -1,0 +1,1 @@
+{"fvSubnet":{"attributes":{"ctrl":"","descr":"installed by ACI Workshop Day0 playbooks","dn":"uni/tn-POV-3tier-L3_1/BD-BACK-END/subnet-[172.16.32.1/24]","ip":"172.16.32.1/24","name":"","preferred":"no","scope":"private","virtual":"no"}}}
