@@ -1,0 +1,8 @@
+
+    [apic]
+    192.168.1.225
+
+    [all:vars]
+    user = admin
+    pass = C!sc0123
+    
