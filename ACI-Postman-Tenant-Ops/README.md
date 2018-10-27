@@ -17,7 +17,7 @@ file= ACI-Health.postman_collection.json
 Example 2: Configure Day (2) Tenant configurations
 
 1) Import this file for Tenant Enviroment variables into Postman. Change IPs, user, pass to your APIC 
-file= ACI Runner CSV Environment.postman_environment.json
+file= ACI Runner Tenant CSV Environment.postman_environment.json
 
 2) Import this collection of tasks into Postman:
 file= ACI-Create-Tenant.postman_collection.json
