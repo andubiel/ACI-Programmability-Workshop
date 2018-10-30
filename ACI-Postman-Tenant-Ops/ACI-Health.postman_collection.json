@@ -1,0 +1,1022 @@
+{
+	"info": {
+		"_postman_id": "4ff2d952-87de-4448-aa64-d4a040a7689f",
+		"name": "ACI-Health",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"aaaUser\" : {\n    \"attributes\" : {\n      \"name\" : \"{{username}}\",\n      \"pwd\" : \"{{password}}\"\n    }\n  }\n}\n"
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/aaaLogin.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"aaaLogin.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get System Health Summay 15min",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/topology/HDfabricOverallHealth15min-0.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"topology",
+						"HDfabricOverallHealth15min-0.json"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get System Health Summay 15min",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://{{apic}}/api/node/mo/topology/HDfabricOverallHealth15min-0.json",
+							"protocol": "https",
+							"host": [
+								"{{apic}}"
+							],
+							"path": [
+								"api",
+								"node",
+								"mo",
+								"topology",
+								"HDfabricOverallHealth15min-0.json"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "false",
+							"name": "Access-Control-Allow-Credentials",
+							"description": "Indicates whether or not the response to the request can be exposed when the credentials flag is true. When used as part of a response to a preflight request, this indicates whether or not the actual request can be made using credentials."
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Origin, X-Requested-With, Content-Type, Accept, devcookie, APIC-challenge",
+							"name": "Access-Control-Allow-Headers",
+							"description": "Used in response to a preflight request to indicate which HTTP headers can be used when making the actual request."
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST,GET,OPTIONS,DELETE",
+							"name": "Access-Control-Allow-Methods",
+							"description": "Specifies the method or methods allowed when accessing the resource. This is used in response to a preflight request."
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "http://127.0.0.1:8000",
+							"name": "Access-Control-Allow-Origin",
+							"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache=\"Set-Cookie, Set-Cookie2\"",
+							"name": "Cache-Control",
+							"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Length",
+							"value": "388",
+							"name": "Content-Length",
+							"description": "The length of the response body in octets (8-bit bytes)"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 02 Sep 2018 20:47:11 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "nginx/1.10.3",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=31536000; includeSubdomains",
+							"name": "Strict-Transport-Security",
+							"description": "A HSTS Policy informing the HTTP client how long to cache the HTTPS only policy and whether this applies to subdomains."
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN",
+							"name": "X-Frame-Options",
+							"description": "Clickjacking protection: \"deny\" - no rendering within a frame, \"sameorigin\" - no rendering if origin mismatch"
+						}
+					],
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"httpOnly": true,
+							"domain": "clms-apic-a.cisco.com",
+							"path": "/",
+							"secure": true,
+							"value": "4DEBAAAAAAAAAAAAAAAAAOD3rVbgmC4Y4y7MV/9rpBMwKY3g0GlTCvSPxL65L9oDGjik02QFu07nE9aPuR4eduwO9vM4vVgVOVLIhQIluuvgX6QFqRlfGlAD0IQsA+YKENHF/PRjdfaZG4/jnbvjVlbldXotxx+G5qT/bMkrqSAazlj/Yh7sT6V56vwpVy5bGI53/8/WnxL3M55mAPv5hQ==",
+							"key": "APIC-cookie"
+						}
+					],
+					"body": "{\"totalCount\":\"1\",\"imdata\":[{\"fabricOverallHealthHist15min\":{\"attributes\":{\"childAction\":\"\",\"cnt\":\"3\",\"dn\":\"topology/HDfabricOverallHealth15min-0\",\"healthAvg\":\"87\",\"healthMax\":\"87\",\"healthMin\":\"87\",\"healthSpct\":\"0\",\"healthThr\":\"\",\"healthTr\":\"0\",\"index\":\"0\",\"lastCollOffset\":\"900\",\"repIntvEnd\":\"2018-09-02T20:33:55.641+00:00\",\"repIntvStart\":\"2018-09-02T20:18:55.409+00:00\",\"status\":\"\"}}}]}"
+				}
+			]
+		},
+		{
+			"name": "Get System Health Summay 5min",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/topology/HDfabricOverallHealth5min-0.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"topology",
+						"HDfabricOverallHealth5min-0.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Switch Inventory",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/topology/pod-1.json?query-target=children&target-subtree-class=fabricNode",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"topology",
+						"pod-1.json"
+					],
+					"query": [
+						{
+							"key": "query-target",
+							"value": "children"
+						},
+						{
+							"key": "target-subtree-class",
+							"value": "fabricNode"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specific Node Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/topology/pod-1/{{node}}/eqptCh.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"topology",
+						"pod-1",
+						"{{node}}",
+						"eqptCh.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specific Node firmware",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/topology/pod-1/{{node}}/firmwareRunning.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"topology",
+						"pod-1",
+						"{{node}}",
+						"firmwareRunning.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specific Node interfaces",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/topology/pod-1/{{node}}/l1PhysIf.json?query-target=children&target-subtree-class=ethpmPhysIf",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"topology",
+						"pod-1",
+						"{{node}}",
+						"l1PhysIf.json"
+					],
+					"query": [
+						{
+							"key": "query-target",
+							"value": "children"
+						},
+						{
+							"key": "target-subtree-class",
+							"value": "ethpmPhysIf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Node Status Specific Ethernet Port",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/topology/pod-1/{{node}}/sys/phys-[{{port}}].json?query-target=children&target-subtree-class=ethpmPhysIf",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"topology",
+						"pod-1",
+						"{{node}}",
+						"sys",
+						"phys-[{{port}}].json"
+					],
+					"query": [
+						{
+							"key": "query-target",
+							"value": "children"
+						},
+						{
+							"key": "target-subtree-class",
+							"value": "ethpmPhysIf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fault Summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/faultSummary.json?query-target-filter=and()&order-by=faultSummary.severity|desc&page=0&page-size=15",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"faultSummary.json"
+					],
+					"query": [
+						{
+							"key": "query-target-filter",
+							"value": "and()"
+						},
+						{
+							"key": "order-by",
+							"value": "faultSummary.severity|desc"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "page-size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fault Counts By Domain - Access",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/faultSummary.json?query-target-filter=and(and(),or(eq(faultSummary.domain, \"access\")))&order-by=faultSummary.severity|desc&page=0&page-size=15",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"faultSummary.json"
+					],
+					"query": [
+						{
+							"key": "query-target-filter",
+							"value": "and(and(),or(eq(faultSummary.domain, \"access\")))"
+						},
+						{
+							"key": "order-by",
+							"value": "faultSummary.severity|desc"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "page-size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fault Counts By Domain - External",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/faultSummary.json?query-target-filter=and(and(),or(eq(faultSummary.domain, \"external\")))&order-by=faultSummary.severity|desc&page=0&page-size=15",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"faultSummary.json"
+					],
+					"query": [
+						{
+							"key": "query-target-filter",
+							"value": "and(and(),or(eq(faultSummary.domain, \"external\")))"
+						},
+						{
+							"key": "order-by",
+							"value": "faultSummary.severity|desc"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "page-size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fualt Counts By Domain - Framework",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/faultSummary.json?query-target-filter=and(and(),or(eq(faultSummary.domain, \"framework\")))&order-by=faultSummary.severity|desc&page=0&page-size=15",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"faultSummary.json"
+					],
+					"query": [
+						{
+							"key": "query-target-filter",
+							"value": "and(and(),or(eq(faultSummary.domain, \"framework\")))"
+						},
+						{
+							"key": "order-by",
+							"value": "faultSummary.severity|desc"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "page-size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fault Counts By Domain - Infra",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/faultSummary.json?query-target-filter=and(and(),or(eq(faultSummary.domain, \"infra\")))&order-by=faultSummary.severity|desc&page=0&page-size=15",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"faultSummary.json"
+					],
+					"query": [
+						{
+							"key": "query-target-filter",
+							"value": "and(and(),or(eq(faultSummary.domain, \"infra\")))"
+						},
+						{
+							"key": "order-by",
+							"value": "faultSummary.severity|desc"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "page-size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fault Counts By Domain - Management",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/faultSummary.json?query-target-filter=and(and(),or(eq(faultSummary.domain, \"management\")))&order-by=faultSummary.severity|desc&page=0&page-size=15",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"faultSummary.json"
+					],
+					"query": [
+						{
+							"key": "query-target-filter",
+							"value": "and(and(),or(eq(faultSummary.domain, \"management\")))"
+						},
+						{
+							"key": "order-by",
+							"value": "faultSummary.severity|desc"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "page-size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fault Counts By Domain - Security",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/faultSummary.json?query-target-filter=and(and(),or(eq(faultSummary.domain, \"security\")))&order-by=faultSummary.severity|desc&page=0&page-size=15",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"faultSummary.json"
+					],
+					"query": [
+						{
+							"key": "query-target-filter",
+							"value": "and(and(),or(eq(faultSummary.domain, \"security\")))"
+						},
+						{
+							"key": "order-by",
+							"value": "faultSummary.severity|desc"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "page-size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fault Counts By Domain - Tenants",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/faultSummary.json?query-target-filter=and(and(),or(eq(faultSummary.domain, \"tenant\")))&order-by=faultSummary.severity|desc&page=0&page-size=15",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"faultSummary.json"
+					],
+					"query": [
+						{
+							"key": "query-target-filter",
+							"value": "and(and(),or(eq(faultSummary.domain, \"tenant\")))"
+						},
+						{
+							"key": "order-by",
+							"value": "faultSummary.severity|desc"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "page-size",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tenants List + Health Score",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/fvTenant.json?rsp-subtree-include=health",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"fvTenant.json"
+					],
+					"query": [
+						{
+							"key": "rsp-subtree-include",
+							"value": "health"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tenant X Health Score",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/{{tenant_name}}.json?query-target=self&rsp-subtree-include=health",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"{{tenant_name}}.json"
+					],
+					"query": [
+						{
+							"key": "query-target",
+							"value": "self"
+						},
+						{
+							"key": "rsp-subtree-include",
+							"value": "health"
+						}
+					]
+				},
+				"description": "https://hostname/api/node/mo/uni/tn-3tierapp.xml?query-target=self&rsp-subtreeinclude=\rhealth"
+			},
+			"response": []
+		},
+		{
+			"name": "Tenant X Faults",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/uni/{{tenant_name}}.json?query-target=self&rsp-subtree-include=faults",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"uni",
+						"{{tenant_name}}.json"
+					],
+					"query": [
+						{
+							"key": "query-target",
+							"value": "self"
+						},
+						{
+							"key": "rsp-subtree-include",
+							"value": "faults"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Audit Log",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/aaaModLR.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"aaaModLR.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "APIC Disk Utilization",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/eqptStorage.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"eqptStorage.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Switch CPU Utilization",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/procSysCPU1d.json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"procSysCPU1d.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Switch Memory Utilization",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/procSysMem1d.json?",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"procSysMem1d.json"
+					],
+					"query": [
+						{
+							"key": "\n",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LLDP Neighbor",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/mo/topology/pod-1/{{node}}/sys/lldp/inst/if-[{{port}}].json",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"mo",
+						"topology",
+						"pod-1",
+						"{{node}}",
+						"sys",
+						"lldp",
+						"inst",
+						"if-[{{port}}].json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Nodes List - Status ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://{{apic}}/api/node/class/topology/pod-1/bgpDom.json?page-size=2000&page=0&rsp-subtree-include=health,fault-count",
+					"protocol": "https",
+					"host": [
+						"{{apic}}"
+					],
+					"path": [
+						"api",
+						"node",
+						"class",
+						"topology",
+						"pod-1",
+						"bgpDom.json"
+					],
+					"query": [
+						{
+							"key": "page-size",
+							"value": "2000"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "rsp-subtree-include",
+							"value": "health,fault-count"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "configure-snapshot",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n \"configExportP\": {\n    \"attributes\": {\n     \"dn\": \"uni/fabric/configexp-defaultOneTime\",\n     \"adminSt\": \"triggered\"\n     }\n   }\n}"
+				},
+				"url": {
+					"raw": "https://<{{apic}}>/api/mo.json",
+					"protocol": "https",
+					"host": [
+						"<{{apic}}>"
+					],
+					"path": [
+						"api",
+						"mo.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
