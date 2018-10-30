@@ -7,7 +7,7 @@ Example 1: Health
 REST/API examples for basic Day (2) operations view and trpubleshoot tasks
 
 1) Import this file for Health Enviroment variables into Postman. Change IPs, user, pass to your APIC 
-file= ACI Health Environment.postman_environment.json
+file= ACI_Health_Environment.postman_environment.json
 
 2) Import this collection of tasks into Postman:
 file= ACI-Health.postman_collection.json
